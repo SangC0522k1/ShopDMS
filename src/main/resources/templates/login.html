@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="/assets/icon.jpg">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/css/iziToast-1.4.0.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/v5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/font-awesome/v5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
+</head>
+<body>
+<div class="container">
+    <!--Data or Content-->
+    <div class="box-1">
+        <div class="content-holder">
+            <h2>Hello!</h2>
+
+            <button class="button-1" onclick="signup()">Sign up</button>
+            <button class="button-2" onclick="login()">Login</button>
+        </div>
+    </div>
+
+
+    <!--Forms-->
+    <div class="box-2">
+        <div class="login-form-container">
+            <h1>Cắm Chìa khóa Vào</h1>
+            <input type="text" id="emailLogin" placeholder="Email" class="input-field">
+            <br><br>
+            <input type="password" id="passwordLogin" placeholder="Password" class="input-field">
+            <br><br>
+            <button class="login-button" id="btnLogin" type="button">Login</button>
+        </div>
+
+
+        <!--Create Container for Signup form-->
+        <div class="signup-form-container">
+            <h1 style="margin-top: 20px;">Xin Thông Tin</h1>
+                <input type="text" id="fullName" placeholder="fullName" class="input-field">
+                <br>
+                <input type="number" id="phone" placeholder="phone" class="input-field">
+            <br>
+                <input type="email" id="address" placeholder="address" class="input-field">
+            <br>
+                <input type="email" id="emailSignUp" placeholder="email" class="input-field">
+            <br>
+                <input type="password" id="passSignUp" placeholder="password" class="input-field">
+            <br>
+                <input type="password" id="repeatpass" placeholder="ConfirmPassword" class="input-field">
+            <br>
+                <button class="signup-button" id="btnSignUp" type="button" style="margin-top: 5px">Sign Up</button>
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="/assets/jquery/jquery-v3.6.0.min.js"></script>
+    <script type="text/javascript" src="/assets/izitoast/v1.4.0/iziToast-1.4.0.js"></script>
+
+    <script src="/assets/js/app.js"></script>
+
+    <script>
+        let page = {
+            urls: {
+                login: App.BASE_URL_LOGIN + "/login",
+                register: App.BASE_URL_LOGIN + "/register",
+            },
+            elements: {},
+            commands: {},
+            initializeEventControl: {}
+        }
+        page.elements.emailLogin = $("#emailLogin");
+        page.elements.passwordLogin = $("#passwordLogin");
+        page.elements.btnLogin = $("#btnLogin");
+
+        page.elements.fullName = $("#fullName");
+        page.elements.phone = $("#phone");
+        page.elements.address = $("#address");
+        page.elements.emailSignUp = $("#emailSignUp");
+        page.elements.passwordSignUp = $("#passSignUp");
+        page.elements.repeatpass = $("#repeatpass");
+        page.elements.btnSignUp = $("#btnSignUp");
+
+
+
+        function signup()
+        {
+            document.querySelector(".login-form-container").style.cssText = "display: none;";
+            document.querySelector(".signup-form-container").style.cssText = "display: block;";
+            document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(56, 189, 149),  rgb(28, 139, 106));";
+            document.querySelector(".button-1").style.cssText = "display: none";
+            document.querySelector(".button-2").style.cssText = "display: block";
+
+        };
+
+        function login()
+        {
+            document.querySelector(".signup-form-container").style.cssText = "display: none;";
+            document.querySelector(".login-form-container").style.cssText = "display: block;";
+            document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(6, 108, 224),  rgb(14, 48, 122));";
+            document.querySelector(".button-2").style.cssText = "display: none";
+            document.querySelector(".button-1").style.cssText = "display: block";
+
+        }
+
+        page.commands.createSignUp = () => {
+            let user = {
+                "username": page.elements.emailSignUp.val(),
+                "password": page.elements.passwordSignUp.val(),
+                "fullName": page.elements.fullName.val(),
+                "address": page.elements.address.val(),
+                "phone": page.elements.phone.val(),
+                "role": {
+                    "id": 2
+                },
+            };
+            if((page.elements.passwordSignUp.val()) == (page.elements.repeatpass.val())){
+                $.ajax({
+                    headers: {
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    type: "POST",
+                    url: page.urls.register,
+                    data: JSON.stringify(user)
+                })
+                    .done(() => {
+                        App.IziToast.showSuccessAlert("Successful!");
+                    })
+                    .fail(() => {
+                        App.IziToast.showErrorAlert("Error!")
+                    })
+            } else {
+                App.IziToast.showErrorAlert("Error! Check password ")
+            }
+        }
+
+        page.commands.login = () => {
+            let user = {
+                "username": page.elements.emailLogin.val(),
+                "password": page.elements.passwordLogin.val(),
+            }
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: page.urls.login,
+                data: JSON.stringify(user)
+            })
+                .done(() => {
+                    App.IziToast.showSuccessAlert("Successful!");
+                    console.log("123334444");
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 150)
+                })
+                .fail(() => {
+                    App.IziToast.showErrorAlert("Error!")
+                })
+
+        }
+
+        page.initializeEventControl = () => {
+            page.elements.btnSignUp.on("click", () => {
+                page.commands.createSignUp();
+            })
+
+            page.elements.btnLogin.on("click", () => {
+                page.commands.login();
+            })
+        }
+        $(() => {
+            page.initializeEventControl();
+        })
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>MS Shop</title>
+    <th:block th:replace="layout/head"/>
+
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body data-layout="horizontal">
+<div id="wrapper">
+    <th:block th:replace="/layout/header"/>
+
+    <div class="content-page">
+        <img src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" style="width: 100%; margin-bottom: 20px; margin-top: -50px;">
+        <div class="container-fluid">
+            <div class="row" id="tbProducIndex">
+                <div class="btn-group col-sm-1">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="/layout/script"/>
+
+
+<script>
+
+    let page = {
+        urls: {
+            getAllProducts: App.BASE_URL_PRODUCT,
+            getProductById: App.BASE_URL_PRODUCT,
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
+        initializeEventControl: {}
+    }
+
+    page.elements.tbProduct = $("#tbProducIndex div");
+    page.elements.modalInfo = $("#modalInfo");
+    page.dialogs.elements.frmInfo = $("#frmInfo");
+    page.dialogs.elements.nameInfo = $("#nameInfo");
+    page.dialogs.elements.amountInfo = $("#amountInfo");
+    page.dialogs.elements.priceInfo = $("#priceInfo");
+    page.dialogs.elements.descriptionInfo = $("#descriptionInfo");
+
+    let avatar = new Avatar();
+    let product = new Product();
+
+    page.commands.handleOpenModalInfoProduct = () => {
+        $(".infoProduct").on("click", function (){
+            let productId = $(this).data("id");
+
+            page.commands.getProductById(productId).then(() => {
+                page.dialogs.elements.nameInfo.val(product.name);
+                page.dialogs.elements.amountInfo.val(product.amount);
+                page.dialogs.elements.priceInfo.val(product.price);
+                page.dialogs.elements.descriptionInfo.val(product.description);
+
+                page.elements.modalInfo.modal("show");
+            })
+                .catch(() => {
+                    console.log("get edit fail");
+                    App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_404);
+                });
+        })
+    }
+
+    page.commands.getAllProducts = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProducts
+        })
+            .done((data) => {
+                data.map(item => {
+                    avatar = item.avatar
+                    page.elements.tbProduct.prepend(App.renderRowProductIndex(item, avatar));
+                });
+                page.commands.handleOpenModalInfoProduct();
+            })
+            .fail((jqXHR) => {
+                App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_500);
+            })
+    }
+
+    page.commands.getProductById = (productId) => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getProductById + "/" + productId
+        })
+            .done((data) => {
+                product = data;
+            })
+            .fail((jqXHR) => {
+                console.log("jqXHR ======");
+                console.log(jqXHR);
+            });
+    }
+
+
+    page.loadData = () => {
+        page.commands.getAllProducts();
+    }
+
+    $(() => {
+        page.loadData();
+
+    })
+
+</script>
+</body>
+</html>
