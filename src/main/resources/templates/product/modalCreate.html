@@ -17,55 +17,57 @@
                     <div class="modal-alert-danger hide">
                     </div>
                     <form id="frmCreate" method="post">
-                        <div class="col-lg-8 fl">
-                            <div class="row col-lg-12 mt-3">
-                                <div class="col-lg-6">
-                                    <label>Name Product</label>
-                                    <input type="text" id="nameCre" name="nameCre" class="form-control">
+                        <div class="row">
+                            <div class="col-lg-8 fl">
+                                <div class="row col-lg-12 mt-3">
+                                    <div class="col-lg-6">
+                                        <label>Name Product</label>
+                                        <input type="text" id="nameCre" name="nameCre" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Amount</label>
+                                        <input type="number" id="amountCre" name="amountCre" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label>Amount</label>
-                                    <input type="number" id="amountCre" name="amountCre" class="form-control">
+                                <div class="row col-lg-12 mt-3">
+                                    <div class="col-lg-6">
+                                        <label>Price</label>
+                                        <input type="number" id="priceCre" name="priceCre" class="form-control">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Description</label>
+                                        <textarea type="text" id="descriptionCre" name="descriptionCre" class="form-control" rows="3"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row col-lg-12 mt-3">
-                                <div class="col-lg-6">
-                                    <label>Price</label>
-                                    <input type="number" id="priceCre" name="priceCre" class="form-control">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Description</label>
-                                    <textarea type="text" id="descriptionCre" name="descriptionCre" class="form-control" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-4 fl">
-                            <section>
-                                <div class="wrapper">
-                                    <div class="image-preview">
-                                        <canvas id="canvas" style="display: none;" width="4094" height="2048"></canvas>
-                                    </div>
-                                    <div class="content" style="opacity: 1;">
-                                        <div class="icon">
-                                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="col-lg-4 fl">
+                                <section>
+                                    <div class="wrapper">
+                                        <div class="image-preview" style="height: 250px; width: 250px">
+                                            <canvas id="canvas" style="display: none;" width="4094" height="2048"></canvas>
                                         </div>
-                                        <div class="text">
-                                            No file chosen, yet!
+                                        <div class="content" style="opacity: 1;">
+                                            <div class="icon">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </div>
+                                            <div class="text">
+                                                No file chosen, yet!
+                                            </div>
+                                            <div class="text">
+                                                Max file size = 2MB
+                                            </div>
                                         </div>
-                                        <div class="text">
-                                            Max file size = 2MB
+                                        <div class="clear-image-preview">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="file-name" style="width: 250px">
+                                            Change image
                                         </div>
                                     </div>
-                                    <div class="clear-image-preview">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                    <div class="file-name">
-                                        Change image
-                                    </div>
-                                </div>
-                                <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden="">
-                            </section>
+                                    <input type="file" id="imageFile" accept="image/jpeg, image/png" hidden="">
+                                </section>
+                            </div>
                         </div>
 
                     </form>

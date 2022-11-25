@@ -58,6 +58,10 @@ public class ProductServiceImpl implements IProductService{
     public void remove(Long id) {
         productRepository.deleteById(id);
     }
+    @Override
+    public void softDelete(long productId) {
+        productRepository.softDelete(productId);
+    }
 
     @Override
     public List<ProductDTO> getAllProduct() {

@@ -33,4 +33,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByUsername(String username);
 
 
+
+    @Modifying
+    @Query("UPDATE User AS u SET u.deleted = true WHERE u.id = :userId")
+    void softDelete(@Param("userId") Long userId);
    }

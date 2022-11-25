@@ -1,9 +1,12 @@
 package com.cg.controller.rest;
 
 import com.cg.exception.DataInputException;
+import com.cg.model.Avatar;
 import com.cg.model.Product;
 import com.cg.model.dto.ProductAvatarDTO;
 import com.cg.model.dto.ProductDTO;
+import com.cg.model.dto.ProductUpdateDTO;
+import com.cg.service.avatar.IAvatarService;
 import com.cg.service.product.IProductService;
 import com.cg.util.AppUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,9 @@ public class ProductRestController {
 
     @Autowired
     private AppUtil appUtil;
+
+    @Autowired
+    private IAvatarService avatarService;
 
     @GetMapping
     public ResponseEntity<?> getAllProduct(){
@@ -53,11 +60,21 @@ public class ProductRestController {
         return new ResponseEntity<>(newProduct.toProductDTO(),HttpStatus.CREATED);
     }
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @PostMapping("/update")
-    public ResponseEntity<ProductDTO> update(@ModelAttribute ProductAvatarDTO productAvatarDTO){
-        Product product = productAvatarDTO.toProduct();
-        Product newProduct = productService.saveWithAvatar(product, productAvatarDTO.getFile());
-        productAvatarDTO.setId(newProduct.getId());
+    @PatchMapping("/update")
+    public ResponseEntity<ProductDTO> update(MultipartFile file, ProductUpdateDTO productUpdateDTO){
+        Product newProduct;
+        Product product = productUpdateDTO.toProduct();
+
+        if (file == null) {
+           Product oldProduct = productService.findById(product.getId()).get();
+           Avatar avatar = avatarService.getById(oldProduct.getAvatar().getId());
+           product.setAvatar(avatar);
+            newProduct = productService.save(product);
+        } else {
+            newProduct = productService.saveWithAvatar(product, file);
+//            productAvatarDTO.setId(newProduct.getId());
+        }
+
         return new ResponseEntity<>(newProduct.toProductDTO(),HttpStatus.CREATED);
     }
     @PreAuthorize("hasAnyAuthority('ADMIN')")
@@ -65,16 +82,14 @@ public class ProductRestController {
     public ResponseEntity<ProductDTO> delete(@PathVariable Long productId){
         Optional<Product> productOptional = productService.findById(productId);
         if(!productOptional.isPresent()){
-            throw new DataInputException("Not exist!");
+            throw new DataInputException("ID khách hàng không hợp lệ.");
         }
         try {
-            productService.remove(productId);
+            productService.softDelete(productId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataInputException("Please contact admin!");
+            throw new DataInputException("Vui lòng liên hệ Administrator.");
         }
     }
-
-
 }

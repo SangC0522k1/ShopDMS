@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="/assets/icon.jpg">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/assets/css/iziToast-1.4.0.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap/v5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/izitoast/v1.4.0/iziToast-1.4.0.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/v5.2.2/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/font-awesome/v5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/assets/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/sweetalert/v2/sweetalert2.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/login.css">
 </head>
@@ -129,7 +129,7 @@
                     data: JSON.stringify(user)
                 })
                     .done(() => {
-                        App.IziToast.showSuccessAlert("Successful!");
+                        App.IziToast.showSuccessAlert("Thành Công");
                     })
                     .fail(() => {
                         App.IziToast.showErrorAlert("Error!")
@@ -154,11 +154,11 @@
                 data: JSON.stringify(user)
             })
                 .done(() => {
-                    App.IziToast.showSuccessAlert("Successful!");
+                    App.IziToast.showSuccessAlert("Thành công");
                     console.log("123334444");
                     setTimeout(() => {
                         window.location.href = "/";
-                    }, 150)
+                    }, 1500)
                 })
                 .fail(() => {
                     App.IziToast.showErrorAlert("Error!")

@@ -58,6 +58,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public void softDelete(Long userId) {
+        userRepository.softDelete(userId);
+    }
+
+    @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);

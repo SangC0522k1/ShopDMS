@@ -11,12 +11,11 @@
     <th:block th:replace="/layout/header"/>
 
     <div class="content-page">
-        <img src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" style="width: 100%; margin-bottom: 20px; margin-top: -50px;">
+        <div class="container-fluid">
+            <img src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" style="width: 100%; margin-bottom: 20px; margin-top: -50px;">
+        </div>
         <div class="container-fluid">
             <div class="row" id="tbProducIndex">
-                <div class="btn-group col-sm-1">
-
-                </div>
             </div>
         </div>
     </div>
@@ -43,7 +42,7 @@
         initializeEventControl: {}
     }
 
-    page.elements.tbProduct = $("#tbProducIndex div");
+    page.elements.tbProduct = $("#tbProducIndex");
     page.elements.modalInfo = $("#modalInfo");
     page.dialogs.elements.frmInfo = $("#frmInfo");
     page.dialogs.elements.nameInfo = $("#nameInfo");

@@ -24,6 +24,7 @@ class App {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
         static SUCCESS_DEACTIVATE = "Xóa sản phẩm thành công !";
+        static SUCCESS_USER = "Xóa USER thành công !";
 
         static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
         static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
@@ -41,7 +42,7 @@ class App {
                 icon: 'success',
                 title: t,
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2500
             })
         }
 
@@ -57,12 +58,12 @@ class App {
         static showSuspendedConfirmDialog() {
             return Swal.fire({
                 icon: 'warning',
-                text: 'Are you sure to delete the selected product ?',
+                text: 'Bạn có chắc chắn xóa không?',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, please suspend this client !',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Có,Tôi muốn Xóa!',
+                cancelButtonText: 'Hủy bỏ',
             })
         }
     }
@@ -146,20 +147,20 @@ class App {
 
     static renderRowProductIndex(obj,avatar){
         let str = `
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="col-3 mb-3">
                 <div class="card product-card">
                     <a class="card-img-top d-block overflow-hidden text-center" href="#">
-                    <img width="auto" height="250px" " alt="Product" src="${this.BASE_CLOUDIARY_IMAGE_URL}/${this.BASE_SCALE_IMAGE}/${avatar.fileFolder}/${avatar.fileName}">
+                    <img width=100% height="250px" " alt="Product" src="${this.BASE_CLOUDIARY_IMAGE_URL}/${this.BASE_SCALE_IMAGE}/${avatar.fileFolder}/${avatar.fileName}">
                     </a>
                     <div class="card-body py-2">
                         <h4 class="product-title fs-sm">${obj.name}</h4>
                         <div class="d-flex justify-content-between">
-                            <div class="product-price"><h6>Price: ${obj.price} vnd<h6></div>
+                            <div class="product-price"><h6>Price:
+                            ${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(obj.price)}<h6></div>
                         </div>
                     </div>
                     <div class="card-body text-center"  style="display: flex">
-                        <button  style="margin: 5px 20px " class="btn btn-info btn-sm d-block w-40 mb-2 infoProduct " type="button" data-id="${obj.id}"><i class="fas fa-file-alt"></i> Info Product</button>
-                        <button style="margin: 5px 20px" class="btn btn-warning btn-sm d-block w-40 mb-2 " type="button" data-id="${obj.id}"><i class="fas fa-cart-arrow-down"></i> Add Cart</button>
+                         <button type="button" class="btn btn-success" style="margin-left: 30px;">Thêm Vào Giỏ Hàng</button>
                     </div>
                 </div>
             </div>

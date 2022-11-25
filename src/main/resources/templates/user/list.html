@@ -210,7 +210,7 @@
             })
                 .done(() => {
                     $("#tr_" + userId).remove();
-                    App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_DEACTIVATE);
+                    App.SweetAlert.showAlertSuccess(App.AlertMessageVi.SUCCESS_USER);
                 })
                 .fail((jqXHR) => {
                     App.SweetAlert.showAlertError(App.AlertMessageVi.ERROR_400);

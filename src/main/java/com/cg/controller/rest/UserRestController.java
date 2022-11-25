@@ -52,14 +52,14 @@ public class UserRestController {
     public ResponseEntity<UserDTO> delete(@PathVariable Long userId) {
         Optional<User> userOptional = userService.findById(userId);
         if(!userOptional.isPresent()){
-            throw new DataInputException("Not User");
+            throw new DataInputException("ID khách hàng không hợp lệ.");
         }
         try {
             userService.remove(userId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new DataInputException("Contact Admin");
+            throw new DataInputException("Vui lòng liên hệ Administrator.");
         }
     }
 }
