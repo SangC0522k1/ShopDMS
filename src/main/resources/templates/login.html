@@ -3,7 +3,7 @@
 <head>
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>MS Shop</title>
     <link rel="stylesheet" href="/assets/izitoast/v1.4.0/iziToast-1.4.0.min.css">
     <link rel="stylesheet" href="/assets/bootstrap/v5.2.2/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/font-awesome/v5.15.4/css/all.min.css">
@@ -16,10 +16,10 @@
     <!--Data or Content-->
     <div class="box-1">
         <div class="content-holder">
-            <h2>Hello!</h2>
+            <h2>Xin CHào!</h2>
 
-            <button class="button-1" onclick="signup()">Sign up</button>
-            <button class="button-2" onclick="login()">Login</button>
+            <button class="button-1" onclick="signup()">Đăng Kí</button>
+            <button class="button-2" onclick="login()">Đăng Nhập</button>
         </div>
     </div>
 
@@ -30,28 +30,28 @@
             <h1>Cắm Chìa khóa Vào</h1>
             <input type="text" id="emailLogin" placeholder="Email" class="input-field">
             <br><br>
-            <input type="password" id="passwordLogin" placeholder="Password" class="input-field">
+            <input type="password" id="passwordLogin" placeholder="Mật Khẩu" class="input-field">
             <br><br>
-            <button class="login-button" id="btnLogin" type="button">Login</button>
+            <button class="login-button" id="btnLogin" type="button">Đăng nhập</button>
         </div>
 
 
         <!--Create Container for Signup form-->
         <div class="signup-form-container">
-            <h1 style="margin-top: 20px;">Xin Thông Tin</h1>
-                <input type="text" id="fullName" placeholder="fullName" class="input-field">
-                <br>
-                <input type="number" id="phone" placeholder="phone" class="input-field">
+            <h1 style="margin-top: 20px;">ĐIền Thông Tin</h1>
+            <input type="text" id="fullName" placeholder="Họ Tên" class="input-field">
             <br>
-                <input type="email" id="address" placeholder="address" class="input-field">
+            <input type="number" id="phone" placeholder="Số Điện Thoại" class="input-field">
             <br>
-                <input type="email" id="emailSignUp" placeholder="email" class="input-field">
+            <input type="email" id="address" placeholder="Địa Chỉ" class="input-field">
             <br>
-                <input type="password" id="passSignUp" placeholder="password" class="input-field">
+            <input type="email" id="emailSignUp" placeholder="email" class="input-field">
             <br>
-                <input type="password" id="repeatpass" placeholder="ConfirmPassword" class="input-field">
+            <input type="password" id="passSignUp" placeholder="Mật Khẩu" class="input-field">
             <br>
-                <button class="signup-button" id="btnSignUp" type="button" style="margin-top: 5px">Sign Up</button>
+            <input type="password" id="repeatpass" placeholder="Nhập lại Mật Khẩu" class="input-field">
+            <br>
+            <button class="signup-button" id="btnSignUp" type="button" style="margin-top: 5px">Đăng Kí</button>
         </div>
 
     </div>
@@ -60,7 +60,6 @@
 
     <script type="text/javascript" src="/assets/jquery/jquery-v3.6.0.min.js"></script>
     <script type="text/javascript" src="/assets/izitoast/v1.4.0/iziToast-1.4.0.js"></script>
-
     <script src="/assets/js/app.js"></script>
 
     <script>
@@ -132,10 +131,10 @@
                         App.IziToast.showSuccessAlert("Thành Công");
                     })
                     .fail(() => {
-                        App.IziToast.showErrorAlert("Error!")
+                        App.IziToast.showErrorAlert("lỗi!")
                     })
             } else {
-                App.IziToast.showErrorAlert("Error! Check password ")
+                App.IziToast.showErrorAlert("Mật Khẩu không Trùng Nhau ")
             }
         }
 
@@ -155,13 +154,12 @@
             })
                 .done(() => {
                     App.IziToast.showSuccessAlert("Thành công");
-                    console.log("123334444");
                     setTimeout(() => {
                         window.location.href = "/";
                     }, 1500)
                 })
                 .fail(() => {
-                    App.IziToast.showErrorAlert("Error!")
+                    App.IziToast.showErrorAlert("lỗi!")
                 })
 
         }

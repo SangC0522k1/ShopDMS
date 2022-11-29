@@ -10,10 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -55,6 +57,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public List<UserDTO> getAllProductDeleteFalse() {
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> getAllUserDeleteFalse() {
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> getAllUserWhereDeletedIsFalse() {
+        return userRepository.getAllUserWhereDeletedIsFalse();
     }
 
     @Override

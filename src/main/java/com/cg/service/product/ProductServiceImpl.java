@@ -63,10 +63,17 @@ public class ProductServiceImpl implements IProductService{
         productRepository.softDelete(productId);
     }
 
+//    @Override
+//    public List<ProductDTO> getAllProduct() {
+//        return productRepository.getAllProduct();
+//    }
+
     @Override
-    public List<ProductDTO> getAllProduct() {
-        return productRepository.getAllProduct();
+    public List<ProductDTO> getAllProductDeleteFalse() {
+        return productRepository.getAllProductDeleteFalse();
     }
+
+
 
     @Override
     public Product saveWithAvatar(Product product, MultipartFile avatarFile) {

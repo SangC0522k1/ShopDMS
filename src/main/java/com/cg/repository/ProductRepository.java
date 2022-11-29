@@ -13,16 +13,31 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
+//    @Query("SELECT NEW com.cg.model.dto.ProductDTO(" +
+//            "p.id, " +
+//            "p.name, " +
+//            "p.amount, " +
+//            "p.price, " +
+//            "p.description, " +
+//            "p.avatar) FROM Product AS p")
+//    List<ProductDTO> getAllProduct();
+
+    @Modifying
+    @Query("UPDATE Product AS c SET c.deleted = true WHERE c.id = :productId")
+    void softDelete(@Param("productId") long productId);
+
     @Query("SELECT NEW com.cg.model.dto.ProductDTO(" +
             "p.id, " +
             "p.name, " +
             "p.amount, " +
             "p.price, " +
             "p.description, " +
-            "p.avatar) FROM Product AS p")
-    List<ProductDTO> getAllProduct();
+            "p.avatar "+
+            ") " +
+            " FROM Product p " +
+            "WHERE p.deleted = false "
+    )
 
-    @Modifying
-    @Query("UPDATE Product AS c SET c.deleted = true WHERE c.id = :productId")
-    void softDelete(@Param("productId") long productId);
+
+    List<ProductDTO> getAllProductDeleteFalse();
 }

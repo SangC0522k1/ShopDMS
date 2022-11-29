@@ -24,8 +24,8 @@ public class UserRestController {
     private IUserService userService;
 
     @GetMapping
-    public ResponseEntity<Iterable<User>> getAll(){
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    public ResponseEntity<?> getAll(){
+        return new ResponseEntity<>(userService.getAllUserWhereDeletedIsFalse(), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}")
@@ -55,7 +55,7 @@ public class UserRestController {
             throw new DataInputException("ID khách hàng không hợp lệ.");
         }
         try {
-            userService.remove(userId);
+            userService.softDelete(userId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             e.printStackTrace();

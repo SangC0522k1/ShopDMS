@@ -10,6 +10,9 @@ import java.util.List;
 public interface IProductService extends IGeneralService<Product> {
     void softDelete(long customerId);
 
-    List<ProductDTO> getAllProduct();
+//    List<ProductDTO> getAllProduct();
+
+    List<ProductDTO> getAllProductDeleteFalse();
+
     Product saveWithAvatar (Product product, MultipartFile avatarFile);
 }

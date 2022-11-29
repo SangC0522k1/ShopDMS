@@ -1,6 +1,7 @@
 package com.cg.repository;
 
 import com.cg.model.User;
+import com.cg.model.dto.ProductDTO;
 import com.cg.model.dto.UserDTO;
 import com.cg.model.dto.UserUpdateDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     Boolean existsByUsername(String username);
+
+    @Query("SELECT NEW com.cg.model.dto.UserDTO (" +
+            "u.id, " +
+            "u.username, " +
+            "u.fullName, " +
+            "u.address, " +
+            "u.phone, " +
+            "u.role" +
+            ") " +
+            "FROM User u " +
+            "WHERE u.deleted = false "
+    )
+    List<UserDTO> getAllUserWhereDeletedIsFalse();
 
 
 

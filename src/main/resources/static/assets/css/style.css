@@ -1,3 +1,8 @@
+.product-image :hover {
+    transition: transform 1s ease;
+    transform: scale(1.1);
+}
+
 .hide {
     display: none;
 }
@@ -7,8 +12,8 @@
 }
 
 table th {
-    background-color: #4CAF50 !important;
-    color: #fff;
+    background-color: #4c87af7a !important;
+    color: #292121;
     border: 1px solid #ddd;
     text-align: center;
 }
@@ -297,6 +302,15 @@ input.error {
     border-color: #f5c2c7;
 }
 
+#alert-danger-register {
+    padding: 10px 35px;
+    margin-bottom: 15px;
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+
 .alert-danger h5 {
     margin-left: -18px;
 }
@@ -311,10 +325,13 @@ label.error{
 input.error {
     border: solid 1px red;
 }
+.table > tbody{
+    background-color: aliceblue;
+}
 
-/*Start Loader*/
+    /*Start Loader*/
 .loader {
-    position: absolute;
+    position: fixed;
     z-index: 1070;
     top: 50%;
     left: 50%;
@@ -325,6 +342,9 @@ input.error {
     height: 50px;
     -webkit-animation: spin 1s linear infinite; /* Safari */
     animation: spin 1s linear infinite;
+}
+body[data-layout=horizontal] .content-page{
+    margin-top: 70px;
 }
 
 /* Safari */

@@ -58,13 +58,13 @@ public class AuthAPI {
         Boolean existsByUsername = userService.existsByUsername(userDTO.getUsername());
 
         if (existsByUsername) {
-            throw new EmailExistsException("Account already exists");
+            throw new EmailExistsException("Email đã có trong hệ thống");
         }
 
         Optional<Role> optRole = roleService.findById(userDTO.getRole().getId());
 
         if (!optRole.isPresent()) {
-            throw new DataInputException("Invalid account role");
+            throw new DataInputException("Role không hợp lệ");
         }
 
         try {
@@ -73,12 +73,15 @@ public class AuthAPI {
             return new ResponseEntity<>(HttpStatus.CREATED);
 
         } catch (DataIntegrityViolationException e) {
-            throw new DataInputException("Account information is not valid, please check the information again");
+            throw new DataInputException("Tài khoản không hợp lệ, vui lòng kiểm tra lại thông tin");
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> login(@Valid  @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return appUtil.mapErrorToResponse(bindingResult);
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));

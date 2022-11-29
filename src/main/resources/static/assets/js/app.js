@@ -24,7 +24,7 @@ class App {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
         static SUCCESS_DEACTIVATE = "Xóa sản phẩm thành công !";
-        static SUCCESS_USER = "Xóa USER thành công !";
+        static SUCCESS_USER = "Vô Hiệu Hóa USER thành công !";
 
         static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
         static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
@@ -58,11 +58,11 @@ class App {
         static showSuspendedConfirmDialog() {
             return Swal.fire({
                 icon: 'warning',
-                text: 'Bạn có chắc chắn xóa không?',
+                text: 'Bạn có chắc chắn vô hiệu hóa không?',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Có,Tôi muốn Xóa!',
+                confirmButtonText: 'Có,Tôi muốn!',
                 cancelButtonText: 'Hủy bỏ',
             })
         }
@@ -98,13 +98,13 @@ class App {
                 <td class="text-center">${obj.address}</td>
                 <td class="text-end num-space">${obj.role.code}</td>
                 <td class="text-center">
-                    <a class="btn btn-outline-secondary edit" data-id="${obj.id}" title="" data-bs-toggle="tooltip"  data-bs-original-title="Edit">
-                        <i class="fas fa-edit"></i>
+                    <a class="btn btn-outline-secondary edit" data-id="${obj.id}" title="" data-bs-toggle="tooltip"  data-bs-original-title="cập Nhật">
+                        <i class="fas fa-user-edit"></i>
                     </a>
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-outline-danger delete" data-id="${obj.id}" title="" data-bs-toggle="tooltip" data-bs-original-title="Delete">
-                        <i class="fas fa-trash-alt"></i>
+                    <a class="btn btn-outline-danger delete" data-id="${obj.id}" title="" data-bs-toggle="tooltip" data-bs-original-title="vô hiệu hóa">
+                        <i class="fas fa-user-times"></i>
                     </a>
                 </td>
             </tr>
@@ -119,7 +119,7 @@ class App {
                 <td class="text-center">${obj.id}</td>
                 <td class="text-center">${obj.name}</td>
                 <td class="text-center">${obj.amount}</td>
-                <td class="text-center">
+                <td class="text-end num-space">
                 ${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(obj.price)}</td>
                 <td class="text-center">${obj.description}</td>
                 <td class="text-center num-space ">
@@ -130,12 +130,12 @@ class App {
                         data-avatar-id = "${avatar.id}"
                                 data-avatar-file-folder = "${avatar.fileFolder}"
                                 data-avatar-file-name = "${avatar.fileName}"
-                    title="" data-bs-toggle="tooltip"  data-bs-original-title="Edit">
+                    title="" data-bs-toggle="tooltip"  data-bs-original-title="Cập Nhật">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-outline-danger delete" data-id="${obj.id}" title="" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                    <a class="btn btn-outline-danger delete" data-id="${obj.id}" title="" data-bs-toggle="tooltip" data-bs-original-title="Xóa">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
@@ -149,18 +149,20 @@ class App {
         let str = `
             <div class="col-3 mb-3">
                 <div class="card product-card">
+                    <div class="product-image">
                     <a class="card-img-top d-block overflow-hidden text-center" href="#">
                     <img width=100% height="250px" " alt="Product" src="${this.BASE_CLOUDIARY_IMAGE_URL}/${this.BASE_SCALE_IMAGE}/${avatar.fileFolder}/${avatar.fileName}">
                     </a>
+            </div>
                     <div class="card-body py-2">
                         <h4 class="product-title fs-sm">${obj.name}</h4>
                         <div class="d-flex justify-content-between">
-                            <div class="product-price"><h6>Price:
+                            <div class="product-price"><h6>Giá:
                             ${new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(obj.price)}<h6></div>
                         </div>
                     </div>
                     <div class="card-body text-center"  style="display: flex">
-                         <button type="button" class="btn btn-success" style="margin-left: 30px;">Thêm Vào Giỏ Hàng</button>
+                         <button type="button" id="card" class="btn btn-success" style="margin-left: 30px;">Thêm Vào Giỏ Hàng</button>
                     </div>
                 </div>
             </div>

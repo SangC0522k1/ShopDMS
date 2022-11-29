@@ -6,6 +6,7 @@ import com.cg.service.IGeneralService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUserService extends IGeneralService<User>, UserDetailsService {
@@ -16,6 +17,12 @@ public interface IUserService extends IGeneralService<User>, UserDetailsService 
     Optional<UserDTO> findUserDTOByUsername(String username);
 
     Boolean existsByUsername(String email);
+
+    List<UserDTO> getAllProductDeleteFalse();
+
+    List<UserDTO> getAllUserDeleteFalse();
+
+    List<UserDTO> getAllUserWhereDeletedIsFalse();
 
     void softDelete(Long userId);
 

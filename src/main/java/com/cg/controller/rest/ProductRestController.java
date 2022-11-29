@@ -36,7 +36,7 @@ public class ProductRestController {
 
     @GetMapping
     public ResponseEntity<?> getAllProduct(){
-        List<ProductDTO> productDTOS = productService.getAllProduct();
+        List<ProductDTO> productDTOS = productService.getAllProductDeleteFalse();
         return new ResponseEntity<>(productDTOS, HttpStatus.OK);
     }
 

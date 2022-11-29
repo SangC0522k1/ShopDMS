@@ -5,14 +5,48 @@
     <th:block th:replace="layout/head"/>
 
     <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/preview-image.css" rel="stylesheet">
 </head>
 <body data-layout="horizontal">
 <div id="wrapper">
     <th:block th:replace="/layout/header"/>
 
     <div class="content-page">
-        <div class="container-fluid">
-            <img src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" style="width: 100%; margin-bottom: 20px; margin-top: -50px;">
+<!--        <div class="container-fluid">-->
+<!--            <img src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" style="width: 100%; margin-bottom: 20px; margin-top: -50px;">-->
+<!--        </div>-->
+
+        <div id="carouselExampleDark" class="carousel carousel-dark slide bg-dark" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner" style="width: 100%; margin-bottom: 31px; margin-top: -50px;" >
+                <div class="carousel-item active" data-bs-interval="1000">
+                    <img height="350px"  src="https://nuochoanam.vn/wp-content/uploads/banner-home-versace.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="500">
+                    <img height="350px" src="http://theperfumestore.vn/wp-content/uploads/2017/10/gucci-banner.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img height="350px" src="https://topprint.vn/wp-content/uploads/2021/07/banner-my-pham-dep-6.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
         <div class="container-fluid">
             <div class="row" id="tbProducIndex">
@@ -52,6 +86,8 @@
 
     let avatar = new Avatar();
     let product = new Product();
+
+
 
     page.commands.handleOpenModalInfoProduct = () => {
         $(".infoProduct").on("click", function (){
